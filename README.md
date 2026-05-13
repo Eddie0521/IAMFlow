@@ -33,7 +33,7 @@
 
 ## 🔥 Updates
 
-- __[2026.05.19]__: We release the [Github Repo](https://github.com/Eddie0521/IAMFlow), the [project page](https://sihuiji.github.io/MemFlow.github.io/), the [arXiv](https://arxiv.org/abs/2512.14699) version, the quantized [model checkpoints](https://huggingface.co/Eddie0521/IAMFlow-FP8), and the [NarraStream-Bench](https://github.com/Eddie0521/NarraStream-Bench).
+- __[2026.05.19]__: We release the [github repo](https://github.com/Eddie0521/IAMFlow), the [project page](https://sihuiji.github.io/MemFlow.github.io/), the [arXiv](https://arxiv.org/abs/2512.14699) version, the quantized [model checkpoints](https://huggingface.co/Eddie0521/IAMFlow-FP8), and the [NarraStream-Bench](https://github.com/Eddie0521/NarraStream-Bench).
 
 ## 📷 Introduction
 💡**TL;DR:** 
