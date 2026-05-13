@@ -1,0 +1,38 @@
+**/__pycache__/
+**/*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.DS_Store
+
+# Local environments and secrets
+.env
+.env.*
+.venv/
+venv/
+
+# Local runtime artifacts
+outputs/
+results/
+processed/
+wandb/
+videos/
+logs/
+data/
+
+# Downloaded models
+pretrained/
+wan_models/
+Qwen3-4B-Instruct-2507/
+Qwen3-4B-FP8/
+Qwen3.5-2B/
+
+# Checkpoints and exported weights
+checkpoints/*.pt
+checkpoints/*.pth
+checkpoints/*.safetensors
+checkpoints/*.ckpt
+iamflow_fp8.safetensors
+
+# Large prompt corpora
+prompts/vidprom_filtered_extended.txt
+prompts/vidprom_filtered_extended_switch.txt

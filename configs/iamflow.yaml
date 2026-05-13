@@ -1,0 +1,83 @@
+# IAMFlow default interactive inference configuration.
+
+# Architecture
+denoising_step_list:
+  - 1000
+  - 750
+  - 500
+  - 250
+warp_denoising_step: true
+num_frame_per_block: 3
+model_name: Wan2.1-T2V-1.3B
+model_kwargs:
+  local_attn_size: 12
+  timestep_shift: 5.0
+  sink_size: 3
+  bank_size: 6
+  record_interval: 3
+  SMA: true
+
+# Inference
+data_path: examples/interactive_example.jsonl
+output_folder: videos/iamflow
+inference_iter: -1
+num_output_frames: 240
+use_ema: false
+seed: 1
+num_samples: 1
+save_with_index: true
+switch_frame_indices: 40, 80, 120, 160, 200
+global_sink: true
+context_noise: 0
+
+# SPT
+spt_enabled: true
+spt:
+  scheduler_type: adaptive
+  base_scheduler: cosine
+  min_window: 3
+  max_window: 15
+  window_frames: 9
+  delay_frames: 3
+  steepness: 6.0
+  frames_per_chunk: 3
+
+# Checkpoints
+generator_ckpt: null
+lora_ckpt: null
+dit_quantized: true
+dit_quant_scheme: fp8-vllm
+dit_quantized_ckpt: pretrained/iamflow_models/iamflow_fp8.safetensors
+
+# LoRA Adapter
+adapter:
+  type: "lora"
+  rank: 256
+  alpha: 256
+  dropout: 0.0
+  dtype: "bfloat16"
+  verbose: false
+
+# IAM Agent Settings
+llm_model_path: pretrained/Qwen3-4B-Instruct-2507
+max_memory_frames: 3
+save_dir: data/agent_frames
+min_id_memory_frames_multi_entity: 2
+gpu_memory_utilization: 0.30      # LLM vLLM: Qwen3-4B weights 7.61 GiB + KV cache
+vlm_gpu_memory_utilization: 0.22  # VLM vLLM: Qwen3-VL-2B weights ~5 GiB + KV/image
+
+# Device placement (multi-GPU)
+# Omit or set to null to keep all components on the default device (cuda:0).
+dit_device: "cuda:0"
+vae_device: "cuda:0"
+text_encoder_device: "cuda:0"
+llm_device: "cuda:0"
+vlm_device: "cuda:0"
+
+# Async VAE streaming decode (independent of VLM)
+async_vae_enabled: true
+
+# VLM Settings
+vlm_enabled: true
+vlm_model_path: pretrained/Qwen3-VL-2B-Instruct
+vlm_score_weight: 0.3

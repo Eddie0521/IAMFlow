@@ -1,0 +1,11 @@
+IAMFlow includes code adapted from third-party projects.
+
+- `iamflow/vendor/wan/` contains code modified from Wan2.1
+  (https://github.com/Wan-Video/Wan2.1). See
+  `iamflow/vendor/wan/README.md` and upstream license terms.
+- Several IAMFlow runtime files contain SPDX headers for
+  `CC-BY-NC-SA-4.0`. These non-commercial terms must be preserved and may
+  constrain redistribution or downstream use.
+- Model weights are not bundled with this repository. Users must obtain
+  Wan/Qwen/IAMFlow checkpoints separately and comply with their respective
+  licenses.
