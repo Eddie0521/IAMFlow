@@ -65,7 +65,7 @@ Download models using hf:
 ``` sh
 pip install "huggingface_hub[cli]"
 hf download Wan-AI/Wan2.1-T2V-1.3B --local-dir pretrained/Wan2.1-T2V-1.3B
-hf download Eddie0521/IAMFlow-FP8 --local-dir pretrained/iamflow_models
+hf download Eddie0521/IAMFlow --local-dir pretrained/iamflow_models
 hf download Qwen/Qwen3-VL-2B-Instruct --local-dir pretrained/Qwen3-VL-2B-Instruct
 hf download Qwen/Qwen3-4B-Instruct-2507 --local-dir pretrained/Qwen3-4B-Instruct-2507
 ```
