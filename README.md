@@ -6,7 +6,7 @@
 
 <div align="center">
   <p>
-    <a href="https://github.com/Eddie0521">Jinzhuo Liu</a><sup>1</sup>
+    <a href="https://eddie0521.github.io/">Jinzhuo Liu</a><sup>1</sup>
     <a href="https://zhangzjn.github.io">Jiangning Zhang</a><sup>1</sup>
     <a href="https://github.com/Rinke02">Wencan Jiang</a><sup>1</sup>
     <a href="https://scholar.google.com/citations?user=xiK4nFUAAAAJ&hl=zh-CN">Yabiao Wang</a><sup>2</sup>
