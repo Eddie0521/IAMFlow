@@ -24,7 +24,7 @@
   </p>
 </div>
 <p align="center">
-  <a href="https://sihuiji.github.io/MemFlow.github.io/"><img src="https://img.shields.io/badge/Project-Page-Green"></a>
+  <a href="https://eddie0521.github.io/projects/iamflow/"><img src="https://img.shields.io/badge/Project-Page-Green"></a>
   &nbsp;
   <img src="https://img.shields.io/static/v1?label=arXiv&message=Coming%20Soon&color=red&logo=arxiv">
   &nbsp;
@@ -33,7 +33,7 @@
 
 ## 🔥 Updates
 
-- __[2026.05.19]__: We release the [github repo](https://github.com/Eddie0521/IAMFlow), the [project page](https://sihuiji.github.io/MemFlow.github.io/), the [arXiv](https://arxiv.org/abs/2512.14699) version, the quantized [model checkpoints](https://huggingface.co/Eddie0521/IAMFlow-FP8), and the [NarraStream-Bench](https://github.com/Eddie0521/NarraStream-Bench).
+- __[2026.05.19]__: We release the [github repo](https://github.com/Eddie0521/IAMFlow), the [project page](https://eddie0521.github.io/projects/iamflow/), the [arXiv](https://arxiv.org/abs/2512.14699) version, the quantized [model checkpoints](https://huggingface.co/Eddie0521/IAMFlow-FP8), and the [NarraStream-Bench](https://github.com/Eddie0521/NarraStream-Bench).
 
 ## 📷 Introduction
 💡**TL;DR:** 
