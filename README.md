@@ -26,7 +26,7 @@
 <p align="center">
   <a href="https://sihuiji.github.io/MemFlow.github.io/"><img src="https://img.shields.io/badge/Project-Page-Green"></a>
   &nbsp;
-  <a href="https://arxiv.org/abs/2512.14699"><img src="https://img.shields.io/static/v1?label=arXiv&message=2512.14699&color=red&logo=arxiv"></a>
+  <img src="https://img.shields.io/static/v1?label=arXiv&message=Coming%20Soon&color=red&logo=arxiv">
   &nbsp;
   <a href="https://huggingface.co/Eddie0521/IAMFlow-FP8"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-orange"></a>
 </p>
