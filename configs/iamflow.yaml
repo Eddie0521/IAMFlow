@@ -29,6 +29,7 @@ save_with_index: true
 switch_frame_indices: 40, 80, 120, 160, 200
 global_sink: true
 context_noise: 0
+use_tinyvae: false
 
 # SPT
 spt_enabled: true
@@ -63,19 +64,19 @@ llm_model_path: pretrained/Qwen3-4B-Instruct-2507
 max_memory_frames: 3
 save_dir: data/agent_frames
 min_id_memory_frames_multi_entity: 2
-gpu_memory_utilization: 0.30      # LLM vLLM: Qwen3-4B weights 7.61 GiB + KV cache
+gpu_memory_utilization: 0.25      # LLM vLLM: Qwen3-4B weights 7.61 GiB + KV cache
 vlm_gpu_memory_utilization: 0.22  # VLM vLLM: Qwen3-VL-2B weights ~5 GiB + KV/image
 
 # Device placement (multi-GPU)
 # Omit or set to null to keep all components on the default device (cuda:0).
 dit_device: "cuda:0"
-vae_device: "cuda:0"
+vae_device: "cuda:1"
 text_encoder_device: "cuda:0"
 llm_device: "cuda:0"
-vlm_device: "cuda:0"
+vlm_device: "cuda:1"
 
 # Async VAE streaming decode (independent of VLM)
-async_vae_enabled: true
+async_vae_enabled: false
 
 # VLM Settings
 vlm_enabled: true

@@ -4,6 +4,7 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 import json
 import re
+import gc
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -104,7 +105,8 @@ class LLMWrapper:
                     trust_remote_code=True,
                     dtype="bfloat16",
                     gpu_memory_utilization=self._gpu_memory_utilization,
-                    max_model_len=1024,
+                    max_model_len=512,
+                    max_num_seqs=1,
                     enforce_eager=True,
                 )
             finally:
@@ -198,7 +200,7 @@ class LLMWrapper:
         self, prompt: str, max_new_tokens: int, temperature: float
     ) -> str:
         sampling_params = self._sampling_params(
-            max_tokens=max_new_tokens,
+            max_tokens=min(max_new_tokens, 256),
             temperature=temperature,
             top_p=0.9 if temperature > 0 else 1.0,
         )
@@ -206,6 +208,31 @@ class LLMWrapper:
         outputs = self._model.generate([prompt], sampling_params)
         response = outputs[0].outputs[0].text.strip()
         return response
+
+    def unload(self) -> None:
+        model = self._model
+        self._model = None
+        self._tokenizer = None
+        self._sampling_params = None
+        if model is not None:
+            try:
+                model.shutdown()
+            except Exception:
+                engine = getattr(model, "llm_engine", None)
+                if engine is not None:
+                    try:
+                        engine.shutdown()
+                    except Exception:
+                        pass
+            del model
+        gc.collect()
+        try:
+            import torch
+
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+        except Exception:
+            pass
 
     def _generate_hf(self, prompt: str, max_new_tokens: int, temperature: float) -> str:
         model_inputs = self._tokenizer([prompt], return_tensors="pt").to(
@@ -498,6 +525,9 @@ class LLMAgent:
         print("[LLMAgent] Preloading LLM model...")
         self.llm.preload()
         print("[LLMAgent] LLM model preloaded")
+
+    def unload(self):
+        self.llm.unload()
 
     def process_prompt(
         self, prompt: str, prompt_id: int, global_registry: Dict[str, Dict]

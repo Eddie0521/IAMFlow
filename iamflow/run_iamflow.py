@@ -254,6 +254,41 @@ def main():
               f"VLM={'cuda:'+str(vlm_device_id) if vlm_device_id is not None else device}")
         print("=" * 60)
 
+    # ----------------------------- Build dataset -----------------------------
+    # Build this before moving DiT/VAE to their final devices so LLM entity
+    # extraction can run and be unloaded before the large diffusion model is on GPU.
+    switch_frame_indices: List[int] = [int(x) for x in config.switch_frame_indices.split(",") if x.strip()]
+    block_size = int(getattr(config, "num_frame_per_block", 1))
+    aligned_switch_indices = _align_switch_indices(switch_frame_indices, block_size)
+    if aligned_switch_indices != switch_frame_indices and local_rank == 0:
+        print(
+            f"[Warning] switch_frame_indices {switch_frame_indices} are not aligned to "
+            f"num_frame_per_block={block_size}, using {aligned_switch_indices}."
+        )
+    switch_frame_indices = aligned_switch_indices
+
+    dataset = MultiTextDataset(config.data_path)
+
+    num_segments = len(dataset[0]["prompts_list"])
+    assert len(switch_frame_indices) == num_segments - 1, (
+        "The number of switch_frame_indices should be the number of prompt segments minus 1"
+    )
+
+    print("Number of segments:", num_segments)
+    print("Switch frame indices:", switch_frame_indices)
+
+    num_prompts_total = len(dataset)
+    sample_index_offset = int(getattr(config, "sample_index_offset", 0))
+    print(f"Number of prompt lines: {num_prompts_total}")
+    print(f"Sample index offset: {sample_index_offset}")
+
+    if dist.is_initialized():
+        sampler = DistributedSampler(dataset, shuffle=False, drop_last=True)
+    else:
+        sampler = SequentialSampler(dataset)
+
+    dataloader = DataLoader(dataset, batch_size=1, sampler=sampler, num_workers=0, drop_last=False)
+
     pipeline = AgentCausalInferencePipeline(
         config,
         device=device,
@@ -272,6 +307,10 @@ def main():
         llm_device_id=llm_device_id,
         vlm_device_id=vlm_device_id,
     )
+
+    if len(dataset) == 1:
+        prompt_groups = [[prompt] for prompt in dataset[0]["prompts_list"]]
+        pipeline._precompute_prompt_entities(prompt_groups)
 
     # ----------------------------- Load generator checkpoint -----------------------------
     checkpoint_route = load_generator_for_inference(pipeline.generator, config)
@@ -325,42 +364,6 @@ def main():
         DynamicSwapInstaller.install_model(pipeline.text_encoder, device=text_encoder_device)
     pipeline.generator.to(device=dit_device)
     pipeline.vae.to(device=vae_device)
-
-    # ----------------------------- Build dataset -----------------------------
-    # Parse switch_frame_indices
-    switch_frame_indices: List[int] = [int(x) for x in config.switch_frame_indices.split(",") if x.strip()]
-    block_size = int(getattr(config, "num_frame_per_block", 1))
-    aligned_switch_indices = _align_switch_indices(switch_frame_indices, block_size)
-    if aligned_switch_indices != switch_frame_indices and local_rank == 0:
-        print(
-            f"[Warning] switch_frame_indices {switch_frame_indices} are not aligned to "
-            f"num_frame_per_block={block_size}, using {aligned_switch_indices}."
-        )
-    switch_frame_indices = aligned_switch_indices
-
-    # Create dataset
-    dataset = MultiTextDataset(config.data_path)
-
-    # Validate number of segments & switch_frame_indices length
-    num_segments = len(dataset[0]["prompts_list"])
-    assert len(switch_frame_indices) == num_segments - 1, (
-        "The number of switch_frame_indices should be the number of prompt segments minus 1"
-    )
-
-    print("Number of segments:", num_segments)
-    print("Switch frame indices:", switch_frame_indices)
-
-    num_prompts_total = len(dataset)
-    sample_index_offset = int(getattr(config, "sample_index_offset", 0))
-    print(f"Number of prompt lines: {num_prompts_total}")
-    print(f"Sample index offset: {sample_index_offset}")
-
-    if dist.is_initialized():
-        sampler = DistributedSampler(dataset, shuffle=False, drop_last=True)
-    else:
-        sampler = SequentialSampler(dataset)
-
-    dataloader = DataLoader(dataset, batch_size=1, sampler=sampler, num_workers=0, drop_last=False)
 
     # Create output directory
     if local_rank == 0:

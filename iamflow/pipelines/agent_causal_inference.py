@@ -96,10 +96,9 @@ class AgentCausalInferencePipeline(InteractiveCausalInferencePipeline):
         self.max_memory_frames = max_memory_frames
         self.save_dir = save_dir
         self.save_frames_to_disk = save_frames_to_disk
+        self._precomputed_prompt_entities: Dict[int, List[EntityStruct]] = {}
 
         os.makedirs(save_dir, exist_ok=True)
-
-        self.llm_agent.preload()
 
 
         self.vlm_score_weight = vlm_score_weight
@@ -228,6 +227,8 @@ class AgentCausalInferencePipeline(InteractiveCausalInferencePipeline):
             init_start.record()
 
         self._reset_agent_state()
+        if not self._precomputed_prompt_entities:
+            self._precompute_prompt_entities(text_prompts_list)
 
         if DEBUG:
             print(f"[AgentPipeline] text_prompts_list: {text_prompts_list}")
@@ -891,6 +892,32 @@ class AgentCausalInferencePipeline(InteractiveCausalInferencePipeline):
         self._sync_vae_decode_times = []
         self._vlm_wait_log = []
 
+    def _precompute_prompt_entities(self, text_prompts_list: List[List[str]]) -> None:
+        """Run all prompt LLM work up front, then release the LLM before DiT."""
+        if self.llm_agent is None:
+            return
+
+        self._precomputed_prompt_entities = {}
+        self.agent_memory_bank.clear()
+        self.llm_agent.id_manager._next_id = 1
+
+        self.llm_agent.preload()
+        for prompt_id, prompt_group in enumerate(text_prompts_list, start=1):
+            prompt_text = prompt_group[0]
+            entities, registry_update = self.llm_agent.process_prompt(
+                prompt=prompt_text,
+                prompt_id=prompt_id,
+                global_registry=self.agent_memory_bank.global_registry,
+            )
+            self.agent_memory_bank.register_entities(
+                entities, prompt_id, registry_update
+            )
+            self._precomputed_prompt_entities[prompt_id] = entities
+
+        self.llm_agent.unload()
+        self.agent_memory_bank.clear()
+        self.llm_agent.id_manager._next_id = 1
+
     def _process_prompt_start(
         self, prompt_text: str, prompt_id: int, is_first_prompt: bool
     ) -> None:
@@ -900,7 +927,10 @@ class AgentCausalInferencePipeline(InteractiveCausalInferencePipeline):
             prompt_text
         )
 
-        if self.llm_agent is None:
+        if prompt_id in self._precomputed_prompt_entities:
+            entities = self._precomputed_prompt_entities[prompt_id]
+            registry_update = None
+        elif self.llm_agent is None:
             entities, registry_update = [], None
         else:
             entities, registry_update = self.llm_agent.process_prompt(

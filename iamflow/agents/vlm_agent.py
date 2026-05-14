@@ -85,6 +85,7 @@ class VLMAgent:
                 trust_remote_code=True,
                 gpu_memory_utilization=self.gpu_memory_utilization,
                 max_model_len=2048,
+                max_num_seqs=1,
                 enforce_eager=True,
                 limit_mm_per_prompt={"image": 3},
             )

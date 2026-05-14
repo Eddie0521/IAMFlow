@@ -22,6 +22,7 @@ except Exception:
 # FLASH_ATTN_3_AVAILABLE = False
 
 import warnings
+import torch.nn.functional as F
 
 __all__ = [
     'flash_attention',
@@ -60,6 +61,32 @@ def flash_attention(
     half_dtypes = (torch.float16, torch.bfloat16)
     assert dtype in half_dtypes
     assert q.device.type == 'cuda' and q.size(-1) <= 256
+
+    if not (FLASH_ATTN_2_AVAILABLE or FLASH_ATTN_3_AVAILABLE):
+        warnings.warn(
+            'Flash attention is not available; falling back to '
+            'torch.nn.functional.scaled_dot_product_attention. '
+            'This is slower and ignores variable-length padding masks.'
+        )
+        out_dtype = q.dtype
+        q = q.transpose(1, 2).to(dtype)
+        k = k.transpose(1, 2).to(dtype)
+        v = v.transpose(1, 2).to(dtype)
+        try:
+            x = F.scaled_dot_product_attention(
+                q,
+                k,
+                v,
+                attn_mask=None,
+                is_causal=causal,
+                dropout_p=dropout_p,
+                enable_gqa=q.size(1) != k.size(1),
+            )
+        except TypeError:
+            x = F.scaled_dot_product_attention(
+                q, k, v, attn_mask=None, is_causal=causal, dropout_p=dropout_p
+            )
+        return x.transpose(1, 2).contiguous().type(out_dtype)
 
     # params
     b, lq, lk, out_dtype = q.size(0), q.size(1), k.size(1), q.dtype
