@@ -85,7 +85,7 @@ parser.add_argument("--mapping_path", type=str, default=None,
 parser.add_argument("--save_frames_to_disk", action="store_true",
                     help="Save frame KV to disk (default: False, keep in memory only for better performance)")
 parser.add_argument("--use_tinyvae", "--use_lightvae", dest="use_tinyvae", action="store_true",
-                    help="Use TinyVAE (tinyvaew2_1.pth) instead of standard VAE")
+                    help="Use TinyVAE (pretrained/iamflow_models/tinyvae.pth by default) instead of standard VAE")
 parser.add_argument("--llm_device", type=str, default=None,
                     help="GPU device for LLM/VLM (e.g. 'cuda:1'). Default: same as DiT device.")
 parser.add_argument("--ablation_mode", type=str, default=None,

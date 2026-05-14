@@ -83,16 +83,19 @@ class WanVAEWrapper(torch.nn.Module):
         self._use_tinyvae = use_lightvae
 
         if self._use_tinyvae:
-            default_tinyvae_path = os.environ.get(
-                "TINYVAE_PATH",
+            repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+            tinyvae_candidates = [
+                os.environ.get("TINYVAE_PATH"),
+                os.path.join(repo_root, "pretrained", "iamflow_models", "tinyvae.pth"),
                 f"{WAN_MODEL_PATH}/tinyvaew2_1.pth",
+                f"{WAN_MODEL_PATH}/taew2_1.pth",
+                f"{WAN_MODEL_PATH}/lightvaew2_1.pth",
+            ]
+            vae_path = vae_path or next(
+                (path for path in tinyvae_candidates if path and os.path.exists(path)),
+                tinyvae_candidates[1],
             )
-            legacy_tinyvae_path = f"{WAN_MODEL_PATH}/lightvaew2_1.pth"
-            vae_path = vae_path or (
-                default_tinyvae_path
-                if os.path.exists(default_tinyvae_path)
-                else legacy_tinyvae_path
-            )
+            print(f"[WanVAEWrapper] Using TinyVAE checkpoint: {vae_path}")
             self.model = TAEHV(checkpoint_path=vae_path).eval().requires_grad_(False)
         else:
             vae_path = vae_path or f"{WAN_MODEL_PATH}/Wan2.1_VAE.pth"
