@@ -57,6 +57,7 @@ conda activate iamflow
 # Install PyTorch first according to your CUDA environment.
 python -m pip install torch==2.9.1 torchvision==0.24.1
 python -m pip install -r requirements.txt
+pip install flash-attn --no-build-isolation
 ```
 
 ### 2. Download Checkpoints
