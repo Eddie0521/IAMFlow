@@ -70,6 +70,8 @@ hf download Qwen/Qwen3-4B-Instruct-2507 --local-dir pretrained/Qwen3-4B-Instruct
 ```
 
 ## 🔑 Inference
+We deploy DiT, TextEncoder, and LLM on one GPU, while VAE and VLM are deployed on another GPU.
+
 ```sh
 bash ./scripts/run_iamflow.sh
 ```
