@@ -20,7 +20,7 @@
     <sup>2</sup>Tencent Youtu Lab &nbsp;&nbsp;
     <sup>3</sup>Huazhong University of Science and Technology<br>
     <sup>4</sup>Shanghai Jiao Tong University &nbsp;&nbsp;
-    <sup>✉</sup>Corresponding author: Jiangning Zhang (186368@zju.edu.cn)
+    <sup>✉</sup>Corresponding author
   </p>
 </div>
 <p align="center">
