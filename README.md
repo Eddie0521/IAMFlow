@@ -7,7 +7,7 @@
 <div align="center">
   <p>
     <a href="https://eddie0521.github.io/">Jinzhuo Liu</a><sup>1</sup>
-    <a href="https://zhangzjn.github.io">Jiangning Zhang</a><sup>1✉</sup>
+    <a href="https://zhangzjn.github.io">Jiangning Zhang</a><sup>1<a href="mailto:186368@zju.edu.cn">✉</a></sup>
     <a href="https://github.com/Rinke02">Wencan Jiang</a><sup>1</sup>
     <a href="https://scholar.google.com/citations?user=xiK4nFUAAAAJ&hl=zh-CN">Yabiao Wang</a><sup>2</sup>
     <a href="https://dk-liang.github.io/">Dingkang Liang</a><sup>3</sup>
@@ -20,7 +20,7 @@
     <sup>2</sup>Tencent Youtu Lab &nbsp;&nbsp;
     <sup>3</sup>Huazhong University of Science and Technology<br>
     <sup>4</sup>Shanghai Jiao Tong University &nbsp;&nbsp;
-    <sup>✉</sup>Corresponding author
+    <sup><a href="mailto:186368@zju.edu.cn">✉</a></sup>Corresponding author
   </p>
 </div>
 <p align="center">
