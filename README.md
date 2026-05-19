@@ -89,4 +89,14 @@ See the [NarraStream-Bench](https://github.com/Eddie0521/NarraStream-Bench).
 ## 🌟 Citation
 Please leave us a star 🌟 and cite our paper if you find our work helpful.
 
-Paper: [arXiv:2605.18733](https://arxiv.org/abs/2605.18733)
+```
+@misc{liu2026advancingnarrativelongvideo,
+      title={Advancing Narrative Long Video Generation via Training-Free Identity-Aware Memory}, 
+      author={Jinzhuo Liu and Jiangning Zhang and Wencan Jiang and Yabiao Wang and Dingkang Liang and Zhucun Xue and Ran Yi and Yong Liu},
+      year={2026},
+      eprint={2605.18733},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2605.18733}, 
+}
+```
