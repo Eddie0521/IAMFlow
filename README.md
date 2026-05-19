@@ -26,24 +26,24 @@
 <p align="center">
   <a href="https://eddie0521.github.io/projects/iamflow/"><img src="https://img.shields.io/badge/Project-Page-Green"></a>
   &nbsp;
-  <img src="https://img.shields.io/static/v1?label=arXiv&message=Coming%20Soon&color=red&logo=arxiv">
+  <a href="https://arxiv.org/abs/2605.18733"><img src="https://img.shields.io/static/v1?label=arXiv&message=2605.18733&color=red&logo=arxiv"></a>
   &nbsp;
   <a href="https://huggingface.co/Eddie0521/IAMFlow-FP8"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-orange"></a>
 </p>
 
 ## 🔥 Updates
 
-- __[2026.05.15]__: We release the [github repo](https://github.com/Eddie0521/IAMFlow), the [project page](https://eddie0521.github.io/projects/iamflow/), the quantized [model checkpoints](https://huggingface.co/Eddie0521/IAMFlow-FP8), and the [NarraStream-Bench](https://github.com/Eddie0521/NarraStream-Bench). The arxiv Version is coming soon.
+- __[2026.05.15]__: We release the [github repo](https://github.com/Eddie0521/IAMFlow), the [project page](https://eddie0521.github.io/projects/iamflow/), the quantized [model checkpoints](https://huggingface.co/Eddie0521/IAMFlow-FP8), the [NarraStream-Bench](https://github.com/Eddie0521/NarraStream-Bench), and the [paper](https://arxiv.org/abs/2605.18733).
 
 ## 📷 Introduction
 💡**TL;DR:** 
- IAMFlow uses explicit identity-aware memory to keep identities consistent across evolving narrative prompts, achieving faster and stronger long video generation on NarraStream-Bench.
+[IAMFlow](https://arxiv.org/abs/2605.18733) uses explicit identity-aware memory to keep identities consistent across evolving narrative prompts, achieving faster and stronger long video generation on [NarraStream-Bench](https://arxiv.org/abs/2605.18733).
 
 
 ## ✨ Highlights
-1. We introduce **IAMFlow**, a training-free identity-aware memory framework that explicitly organizes historical information around persistent entities and attributes, enabling reliable identity preservation across evolving prompt transitions.
+1. We introduce [**IAMFlow**](https://arxiv.org/abs/2605.18733), a training-free identity-aware memory framework that explicitly organizes historical information around persistent entities and attributes, enabling reliable identity preservation across evolving prompt transitions.
 2. We design a systematic inference acceleration pipeline to make the framework computationally practical, combining asynchronous visual verification, adaptive prompt transition, and model quantization to preserve long-term consistency without sacrificing generation speed.
-3. We introduce **NarraStream-Bench**, a modern benchmark suite for assessing long-term consistency in narrative streaming video generation. Extensive experiments and ablation studies demonstrate that IAMFlow achieves superior performance across various metrics while enabling more efficient inference.
+3. We introduce [**NarraStream-Bench**](https://arxiv.org/abs/2605.18733), a modern benchmark suite for assessing long-term consistency in narrative streaming video generation. Extensive experiments and ablation studies demonstrate that IAMFlow achieves superior performance across various metrics while enabling more efficient inference.
 
 ## 🛠️ Installation
 ### 1. Install Requirements
@@ -89,6 +89,4 @@ See the [NarraStream-Bench](https://github.com/Eddie0521/NarraStream-Bench).
 ## 🌟 Citation
 Please leave us a star 🌟 and cite our paper if you find our work helpful.
 
-```
-Coming Soon
-```
+Paper: [arXiv:2605.18733](https://arxiv.org/abs/2605.18733)
