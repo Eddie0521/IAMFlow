@@ -33,11 +33,12 @@
 
 ## 🔥 Updates
 
-- __[2026.05.15]__: We release the [github repo](https://github.com/Eddie0521/IAMFlow), the [project page](https://eddie0521.github.io/projects/iamflow/), the quantized [model checkpoints](https://huggingface.co/Eddie0521/IAMFlow-FP8), the [NarraStream-Bench](https://github.com/Eddie0521/NarraStream-Bench), and the [paper](https://arxiv.org/abs/2605.18733).
+- __[2026.05.19]__: We release the [github repo](https://github.com/Eddie0521/IAMFlow), the [project page](https://eddie0521.github.io/projects/iamflow/), the quantized [model checkpoints](https://huggingface.co/Eddie0521/IAMFlow-FP8), the [NarraStream-Bench](https://github.com/Eddie0521/NarraStream-Bench), and the [paper](https://arxiv.org/abs/2605.18733).
+
 
 ## 📷 Introduction
 💡**TL;DR:** 
-[IAMFlow](https://arxiv.org/abs/2605.18733) uses explicit identity-aware memory to keep identities consistent across evolving narrative prompts, achieving faster and stronger long video generation on [NarraStream-Bench](https://arxiv.org/abs/2605.18733).
+[IAMFlow](https://arxiv.org/abs/2605.18733) uses explicit identity-aware memory to keep identities consistent across evolving narrative prompts, achieving faster and stronger long video generation on [NarraStream-Bench](https://github.com/Eddie0521/NarraStream-Bench).
 
 
 ## ✨ Highlights
