@@ -4,6 +4,8 @@
 
 # <div align="center" >Advancing Narrative Long Video Generation via Training-Free Identity-Aware Memory<div align="center">
 
+<h3 align="center">NeurIPS 2026</h3>
+
 <div align="center">
   <p>
     <a href="https://eddie0521.github.io/">Jinzhuo Liu</a><sup>1</sup>,
@@ -24,6 +26,8 @@
   </p>
 </div>
 <p align="center">
+  <a href="https://neurips.cc/Conferences/2026"><img src="https://img.shields.io/badge/NeurIPS-2026-blueviolet"></a>
+  &nbsp;
   <a href="https://eddie0521.github.io/projects/iamflow/"><img src="https://img.shields.io/badge/Project-Page-Green"></a>
   &nbsp;
   <a href="https://arxiv.org/abs/2605.18733"><img src="https://img.shields.io/static/v1?label=arXiv&message=2605.18733&color=red&logo=arxiv"></a>
@@ -33,6 +37,7 @@
 
 ## 🔥 Updates
 
+- __[2026.09.25]__: 🎉 IAMFlow is accepted to **NeurIPS 2026**!
 - __[2026.05.19]__: We release the [github repo](https://github.com/Eddie0521/IAMFlow), the [project page](https://eddie0521.github.io/projects/iamflow/), the quantized [model checkpoints](https://huggingface.co/Eddie0521/IAMFlow-FP8), the [NarraStream-Bench](https://github.com/Eddie0521/NarraStream-Bench), and the [paper](https://arxiv.org/abs/2605.18733).
 
 
@@ -91,13 +96,10 @@ See the [NarraStream-Bench](https://github.com/Eddie0521/NarraStream-Bench).
 Please leave us a star 🌟 and cite our paper if you find our work helpful.
 
 ```
-@misc{liu2026advancingnarrativelongvideo,
-      title={Advancing Narrative Long Video Generation via Training-Free Identity-Aware Memory}, 
+@inproceedings{liu2026advancingnarrativelongvideo,
+      title={Advancing Narrative Long Video Generation via Training-Free Identity-Aware Memory},
       author={Jinzhuo Liu and Jiangning Zhang and Wencan Jiang and Yabiao Wang and Dingkang Liang and Zhucun Xue and Ran Yi and Yong Liu},
-      year={2026},
-      eprint={2605.18733},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2605.18733}, 
+      booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
+      year={2026}
 }
 ```
